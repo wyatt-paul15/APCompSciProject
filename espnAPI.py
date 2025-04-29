@@ -1,28 +1,28 @@
 import json
 
 # Function that shows headlines
-def show_headlines(headlines):
-    if len(headlines) == 0:
+def show_headlines(headlines): # Takes a list called headlines as input.
+    if len(headlines) == 0: # If the list is empty (len(headlines) == 0), it prints a message saying no headlines are available.
         print("No headlines available!")
-    else:
+    else: # Otherwise, it prints a heading and then loops through each headline and prints it with a dash in front.
         print("Here are the latest headlines:")
         for headline in headlines:
             print("-", headline)
 
 # Function that shows teams
-def show_teams(nicknames):
+def show_teams(nicknames): # Takes a list called nicknames. 
     if len(nicknames) == 0:
-        print("No nicknames available!")
-    else:
+        print("No nicknames available!") # Prints a message if the list is empty.
+    else: # Otherwise, loops through each nickname and prints it.
         print("Here are the nicknames:")
         for nickname in nicknames:
             print(nickname)
 
 # Function that shows dates
-def show_dates(dates):
+def show_dates(dates): # Takes a list of dates.
     if len(dates) == 0:
-        print("No Dates available!")
-    else:
+        print("No Dates available!") # If the list is empty, prints "No Dates available!"
+    else: # Otherwise, loops through and prints each date.
         print("Here are the Dates:")
         for date in dates:
             print(date)    
@@ -52,10 +52,10 @@ elif command == "teams":
             team_info = [] # List of teams
 
             data = json.loads(content) # The json.loads() method of JSON module is used to parse a valid JSON string and convert it into a Python dictionary. https://www.geeksforgeeks.org/json-loads-in-python/
-            for sport in data['sports']:
-                for league in sport['leagues']:
-                    for teams in league['teams']:
-                        team = teams['team']
+            for sport in data['sports']: # for sport in data['sports']: Iterates over each sport.
+                for league in sport['leagues']: # for league in sport['leagues']: Within each sport, iterates through its leagues.
+                    for teams in league['teams']: # for teams in league['teams']: Within each league, iterates through its list of teams.
+                        team = teams['team'] # team = teams['team']: Accesses the team object from the current team entry.
                         team_info.append(team['location'] + " " + team['nickname'])
             show_teams(team_info)
 
@@ -68,9 +68,9 @@ elif command == "dates":
             weeks = [] # List of dates
 
             data = json.loads(content)  # The json.loads() method of JSON module is used to parse a valid JSON string and convert it into a Python dictionary. https://www.geeksforgeeks.org/json-loads-in-python/
-            for league in data['leagues']:
-                for calender in league['calenders']:
-                    for entry in calender['entries']:
+            for league in data['leagues']: # for league in data['leagues']: Iterates over each league.
+                for calendar in league['calenders']: # for calender in league['calenders']: For each league, iterates through its calendars 
+                    for entry in calendar['entries']: # for entry in calender['entries']: For each calendar, loops through its entries.
                         weeks.append(entry['label'] + " " + entry['detail'])
             show_dates(weeks)
 
